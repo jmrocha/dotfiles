@@ -1,17 +1,21 @@
 set number 
 set relativenumber 
-set shiftwidth=2
-set softtabstop=2 
 set expandtab 
 set autoindent
-set rtp+=/usr/local/opt/fzf
-set colorcolumn=80
 set wrap!
 set ruler
 set ic
 set hls is
+set shiftwidth=2
+set softtabstop=2 
+"set colorcolumn=80
+set rtp+=/usr/local/opt/fzf
+set dir=~/.vim/tmp
 
-syntax on
+"hi Search guibg=blue guifg=red
+"highlight Search ctermbg=blue ctermfg=black
+"highlight ColorColumn ctermbg=0 ctermfg=lightgrey
+highlight Comment cterm=italic
 
 imap jj <ESC>
 imap zz <ESC>:update<cr>
@@ -20,57 +24,50 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap zz :update<CR>
+nnoremap <space> za
 
 
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2019 Dec 17
-"
-" To use it, copy it to
-"	       for Unix:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"	 for MS-Windows:  $VIM\_vimrc
-"	      for Haiku:  ~/config/settings/vim/vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
 
-" When started as "evim", evim.vim will already have done these settings, bail
-" out.
-if v:progname =~? "evim"
-  finish
-endif
+" Declare the list of plugins.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-python/python-syntax'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Colorscheme
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'craigemery/vim-autotag'
+Plug 'chrisbra/Colorizer'
 
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'dense-analysis/ale'
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  if has('persistent_undo')
-    set undofile	" keep an undo file (undo changes after closing)
-  endif
-endif
+"Plug 'fisadev/vim-isort'
+"Plug 'tmhedberg/SimpylFold'
 
-if &t_Co > 2 || has("gui_running")
-  " Switch on highlighting the last used search pattern.
-  set hlsearch
-endif
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
 
-" Put these in an autocmd group, so that we can delete them easily.
-augroup vimrcEx
-  au!
+" colorscheme configuration
+"highlight clear
+"if exists('syntax_on')
+"  syntax reset
+"endif
+"let g:colors_name = 'material'
+"let g:material_theme_style = get(g:, 'material_theme_style', 'default')
+let g:material_terminal_italics = get(g:, 'material_terminal_italics', 1)
+let g:material_theme_style = 'ocean'
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-augroup END
+colorscheme material
 
-" Add optional packages.
-"
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
-if has('syntax') && has('eval')
-  packadd! matchit
-endif
+let g:vim_jsx_pretty_colorful_config = 1
+let NERDTreeShowLineNumbers=1
+
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_autoimport = 1
