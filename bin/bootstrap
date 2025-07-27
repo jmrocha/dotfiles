@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Install homebrew
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+
+brew install git
+brew install nvim
+brew install tmux
+brew install bat fzf fd ripgrep
+brew install broot
+
+# runtime environments and build tools
+brew install coreutils
+brew install lua
+brew install node
+brew install llvm
+
+brew install stow

@@ -1,5 +1,10 @@
-set editing-mode vi 
-set keymap vi-insert       
+bind -v
+set editing-mode vi
+$if mode=vi
+set keymap vi-insert
 "jj": vi-movement-mode
-set show-mode-in-prompt on
-
+set keyseq-timeout 10
+$if mode=vi
+	set keymap vi-insert
+	Control-l: clear-screen
+$endif
