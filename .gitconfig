@@ -1,0 +1,11 @@
+[core]
+	editor = nvim
+	quotepath = false
+	autocrlf = input
+	pager = less
+[push]
+	default = simple
+[gpg]
+	program = gpg
+[help]
+	autocorrect = 1

@@ -10,7 +10,6 @@ export SSL_CERT_FILE=/usr/local/etc/openssl@3/cert.pem
 alias eplus8.6='/Applications/EnergyPlus-8-6-0/energyplus'
 alias eplus23='/Applications/EnergyPlus-23-1-0/energyplus-23.1.0'
 alias eplus9.4='/Applications/EnergyPlus-9-4-0/energyplus'
-alias python='python3'
 alias ls='ls -a -CFG --color'
 alias l='ls -a -G --color'
 alias la='ls -la -G --color'
@@ -68,7 +67,7 @@ export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/usr/local/opt/node@20/bin:$PATH"
 
-source /Users/joao/.config/broot/launcher/bash/br
+source $HOME/.config/broot/launcher/bash/br
 ### key-bindings.zsh ###
 #     ____      ____
 #    / __/___  / __/
@@ -226,7 +225,7 @@ export PATH="/usr/local/opt/homebrew/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export ISE_LIBRARY="/usr/local/Cellar/eiffelstudio/24.05.107822/library"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/joao/.docker/completions $fpath)
+fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
