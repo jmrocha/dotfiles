@@ -217,7 +217,7 @@ fi
 ### end: key-bindings.zsh ###
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
-#export TERM=tmux-256color
+export TERM="xterm-256color"
 
 export PATH="$PATH:$HOME/practice/eiffel/Eifell_25.02/studio/spec/macosx-86-64/bin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
