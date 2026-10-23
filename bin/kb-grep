@@ -1,0 +1,1 @@
+rg --files-with-matches "$1" ~/corsair/kb | fzf | xargs nvim

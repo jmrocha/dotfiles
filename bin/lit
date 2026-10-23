@@ -1,0 +1,7 @@
+path=$HOME/corsair/downloads
+path=$HOME/icloud/Documents/literature
+path=$HOME/corsair/literature
+fd --no-require-git --ignore-case --type f --type l -e pdf --print0 . $path | \
+	fzf --read0 --print0 | \
+	tee /dev/tty | \
+	xargs -0 open

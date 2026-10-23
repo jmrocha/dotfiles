@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+# Script to remove ACLs from a file or directory
+# Usage: ./remove_acls.zsh /path/to/file
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: $0 <path>"
+    echo "Removes all ACLs from the specified file or directory"
+    exit 1
+fi
+
+path="$1"
+
+# Check if path exists
+if [[ ! -e "$path" ]]; then
+    echo "Error: Path does not exist: $path"
+    exit 1
+fi
+
+echo "Removing ACLs from: $path"
+
+# Run chmod -N with sudo
+/usr/bin/sudo /bin/chmod -RN "$path"
+
+if [[ $? -eq 0 ]]; then
+    echo "✓ Successfully removed ACLs"
+else
+    echo "✗ Failed to remove ACLs"
+    exit 1
+fi

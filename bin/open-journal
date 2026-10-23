@@ -1,0 +1,15 @@
+#!/bin/zsh
+# Open `journal` in a new window of the running Alacritty (or launch Alacritty).
+A=/Applications/Alacritty.app/Contents/MacOS/alacritty
+dir=$(getconf DARWIN_USER_TEMP_DIR)
+log="${dir}open-journal.log"
+
+for sock in "$dir"Alacritty-*.sock(N); do
+  if "$A" msg --socket "$sock" create-window -e /bin/zsh -lic journal 2>>"$log"; then
+    osascript -e 'tell application "Alacritty" to activate'
+    exit 0
+  fi
+done
+
+{ date; echo "no live socket in $dir; TMPDIR=$TMPDIR"; ls "$dir" | grep -i alacritty } >>"$log"
+open -a Alacritty --args -e /bin/zsh -lic journal

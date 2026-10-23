@@ -5,11 +5,6 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 
-export SSL_CERT_FILE=/usr/local/etc/openssl@3/cert.pem
-
-alias eplus8.6='/Applications/EnergyPlus-8-6-0/energyplus'
-alias eplus23='/Applications/EnergyPlus-23-1-0/energyplus-23.1.0'
-alias eplus9.4='/Applications/EnergyPlus-9-4-0/energyplus'
 alias ls='ls -a -CFG --color'
 alias l='ls -a -G --color'
 alias la='ls -la -G --color'
@@ -22,9 +17,7 @@ alias view='nvim -R'
 export LC_CTYPE="UTF-8"
 export LANG="C"
 
-export PATH="/usr/local/bin:$PATH:$HOME/.docker/bin"
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 function pman() {
   mandoc -T pdf "$(/usr/bin/man -w $@)" | open -fa Preview
@@ -33,7 +26,7 @@ function pman() {
 #source ~/key-bindings.zsh
 #source ~/completion.zsh
 
-export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_COMMAND="fd --type f -L"
 export FZF_ALT_C_COMMAND="fd --type d"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 70% --tmux 70% --layout=reverse --border'
@@ -57,17 +50,11 @@ export FZF_CTRL_R_OPTS="
 export EDITOR='nvim'
 #source /usr/local/opt/chruby/share/chruby/chruby.sh
 #source /usr/local/opt/chruby/share/chruby/auto.sh
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="$PATH:$HOME/.local/bin"
-PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/binutils/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="/usr/local/opt/node@20/bin:$PATH"
 
-source $HOME/.config/broot/launcher/bash/br
 ### key-bindings.zsh ###
 #     ____      ____
 #    / __/___  / __/
@@ -215,15 +202,8 @@ fi
   'unset' '__fzf_key_bindings_options'
 }
 ### end: key-bindings.zsh ###
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export TERM="xterm-256color"
-
-export PATH="$PATH:$HOME/practice/eiffel/Eifell_25.02/studio/spec/macosx-86-64/bin"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/opt/homebrew/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export ISE_LIBRARY="/usr/local/Cellar/eiffelstudio/24.05.107822/library"
+#export TERM="screen-256color"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
@@ -235,3 +215,49 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BAT=1
 
 source $HOME/fzf-git.sh
+
+export CFLAGS="-I $HOMEBREW_PREFIX/opt/openssl@3/include -fopenmp"
+export LDFLAGS="-L $HOMEBREW_PREFIX/opt/openssl@3/lib"
+export LDFLAGS="$LDFLAGS -L $HOMEBREW_PREFIX/opt/llvm/lib -lomp"
+
+#. "$HOME/.atuin/bin/env"
+
+#eval "$(atuin init zsh)"
+
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/binutils/bin:$PATH"
+export PATH="$HOME/.docker/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/eiffelstudio:$PATH"
+export PATH="$HOME/corsair/downloads/sfizz/sfizz-1.2.3/build/library/bin:$PATH"
+
+
+#export ISE_EIFFEL="$HOME/corsair/downloads/Eiffel_25.12"
+export ISE_EIFFEL="$HOMEBREW_PREFIX/opt/eiffelstudio"
+export ISE_LIBRARY=$ISE_EIFFEL
+export EIFFEL_SRC="$HOME/corsair/computing/eiffel/eiffel-ec/eiffel-codebase/Src"
+export ISE_PLATFORM="macosx-x86-64"
+export CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
+export MACOSX_DEPLOYMENT_TARGET=26.0
+
+ensemble=$HOME/corsair/work/guitar-ensemble
+source $ensemble/setup.sh
+
+disable echo
+export EIFFEL_DEV=~/corsair/computing/eiffel/eiffel-lang
+source ~/.config/restic/env
+source ~/.config/backblaze/env
+
+# >>> b2 autocomplete >>>
+# This section is managed by b2 . Manual edit may break automated updates.
+if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -D; fi
+source /Users/joao/.zsh/completion/_b2
+
+# <<< b2 autocomplete <<<
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8

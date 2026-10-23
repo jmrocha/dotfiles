@@ -1,20 +1,25 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
+# todo: check if brew is installed first
 # Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install git
-brew install nvim
-brew install tmux
-brew install bat fzf fd ripgrep
-brew install broot
-
-# runtime environments and build tools
-brew install coreutils
-brew install lua
-brew install node
-brew install llvm
-
-brew install stow
+brew install \
+	git \
+	nvim \
+	tmux \
+	bat \
+	fzf \
+	fd \
+	ripgrep \
+	broot \
+	lua \
+	node \
+	llvm \
+	stow \
+	yt-dlp \
+	ffmpeg \
+	coreutils \
+	binutils
 
 stow .

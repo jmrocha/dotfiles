@@ -9,3 +9,13 @@
 	program = gpg
 [help]
 	autocorrect = 1
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = João M. Rocha
+	email = rocha.jmiguel@gmail.com
+[init]
+	defaultBranch = master

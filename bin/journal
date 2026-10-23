@@ -1,0 +1,4 @@
+file=$HOME/corsair/journal/$(date +%F).md
+touch $file
+ln -fs $file $HOME/corsair/journal/current.md
+$EDITOR $file

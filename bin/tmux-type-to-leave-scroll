@@ -1,0 +1,31 @@
+#!/bin/sh
+# After a mouse-wheel scroll, typing leaves copy mode and goes to the prompt,
+# so there is no need to scroll back down first. Copy mode entered with
+# prefix [ keeps the vi keys. Run from .tmux.conf; safe to run again on reload.
+
+current() { # the key's present command (list-keys with a key name prints nothing here)
+  tmux list-keys -T copy-mode-vi | awk -v k="$1" '$4 == k { sub(/^bind-key +-T +copy-mode-vi +[^ ]+ +/, ""); gsub(/ \\; /, " ; "); print }'
+}
+
+wrap() { # key, literal text to type
+  orig=$(tmux list-keys -T copy-mode-vi -- "$1" 2>/dev/null | sed -E 's/^bind-key +-T +copy-mode-vi +[^ ]+ +//; s/ \; / ; /g')
+  case $orig in *@scrolled*) return ;; esac
+  if [ -n "$orig" ]; then
+    tmux bind -T copy-mode-vi -- "$1" if -F '#{@scrolled}' "send -X cancel ; send -l -- '$2'" "$orig"
+  else
+    tmux bind -T copy-mode-vi -- "$1" if -F '#{@scrolled}' "send -X cancel ; send -l -- '$2'"
+  fi
+}
+
+for k in a b c d e f g h i j k l m n o p q r s t u v w x y z \
+         A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
+         0 1 2 3 4 5 6 7 8 9 - . / , = + : ! ? _ @ '~'; do
+  wrap "$k" "$k"
+done
+wrap Space ' '
+
+# Enter with nothing selected runs the line; with a selection it still copies.
+orig=$(current Enter)
+case $orig in *@scrolled*) ;; *)
+  tmux bind -T copy-mode-vi Enter if -F '#{&&:#{@scrolled},#{?selection_present,0,1}}' "send -X cancel ; send Enter" "$orig" ;;
+esac

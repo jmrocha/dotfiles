@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/joao/.docker/bin"
+# End of Docker Desktop section.
+
 export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
 source ~/git-prompt.sh
 
@@ -71,3 +75,6 @@ function emit_bitcode {
   clang -emit-llvm -c -O0 -Xclang -disable-O0-optnone -Xclang -disable-llvm-passes $@
 }
 
+
+. "$HOME/.atuin/bin/env"
+. "$HOME/.cargo/env"
